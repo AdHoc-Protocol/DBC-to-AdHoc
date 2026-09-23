@@ -108,8 +108,8 @@ namespace org.dbc {
             public const uint can_id = 0x250;
             public const bool extended = false;
             public const int dlc = 6;
-            [StartBit(7), BigEndian, PhysRange(-1000, 1000)] short TORQUE_L;
-            [StartBit(23), BigEndian, PhysRange(-1000, 1000)] short TORQUE_R;
+            [StartBit(7), BigEndian, PhysRange(-1000, 1000)] short TORQUE_L; // physics: a two-sided quantity, raw straddles zero (raw span -32768…32767); if the typical excursion is small, consider [X(amplitude)]
+            [StartBit(23), BigEndian, PhysRange(-1000, 1000)] short TORQUE_R; // physics: a two-sided quantity, raw straddles zero (raw span -32768…32767); if the typical excursion is small, consider [X(amplitude)]
             [MinMax(0, 15), StartBit(35), BigEndian, PhysRange(0, 15)] byte COUNTER;
             [StartBit(47), BigEndian, PhysRange(0, 255)] byte CHECKSUM;
         }
@@ -207,8 +207,8 @@ namespace org.dbc {
             public const uint can_id = 0x350;
             public const bool extended = false;
             public const int dlc = 6;
-            [StartBit(7), BigEndian, PhysRange(-1000, 1000)] short TORQUE_L;
-            [StartBit(23), BigEndian, PhysRange(-1000, 1000)] short TORQUE_R;
+            [StartBit(7), BigEndian, PhysRange(-1000, 1000)] short TORQUE_L; // physics: a two-sided quantity, raw straddles zero (raw span -32768…32767); if the typical excursion is small, consider [X(amplitude)]
+            [StartBit(23), BigEndian, PhysRange(-1000, 1000)] short TORQUE_R; // physics: a two-sided quantity, raw straddles zero (raw span -32768…32767); if the typical excursion is small, consider [X(amplitude)]
             [MinMax(0, 15), StartBit(35), BigEndian, PhysRange(0, 15)] byte COUNTER;
             [StartBit(47), BigEndian, PhysRange(0, 255)] byte CHECKSUM;
         }

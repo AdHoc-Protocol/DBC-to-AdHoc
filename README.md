@@ -12,6 +12,63 @@ DBC node list and the sender / receiver lists of every message give a real netwo
 The project is self-contained: converter, a local copy of the emitter helpers, sample fetcher, build and
 validation scripts. Java 17+ only, no dependencies.
 
+## Before and after
+
+`samples/tesla_can.dbc`, 901 lines — [source](samples/tesla_can.dbc) → [result](AdHoc/tesla_can.cs). One message
+of it, the steering command the Autopilot computer sends to the power steering:
+
+```dbc
+VERSION ""
+
+BU_:
+
+BO_ 1160 DAS_steeringControl: 4 NEO
+ SG_ DAS_steeringControlType : 23|2@0+ (1,0) [0|0] "" EPAS
+ SG_ DAS_steeringControlChecksum : 31|8@0+ (1,0) [0|0] "" EPAS
+ SG_ DAS_steeringControlCounter : 19|4@0+ (1,0) [0|0] "" EPAS
+ SG_ DAS_steeringAngleRequest : 6|15@0+ (0.1,-1638.35) [-1638.35|1638.35] "deg" EPAS
+ SG_ DAS_steeringHapticRequest : 7|1@0+ (1,0) [0|0] "" EPAS
+
+// … 43 more BO_ blocks …
+
+VAL_ 1160 DAS_steeringAngleRequest 16384 "ZERO_ANGLE" ;
+VAL_ 1160 DAS_steeringControlType 1 "ANGLE_CONTROL" 3 "DISABLED" 0 "NONE" 2 "RESERVED" ;
+VAL_ 1160 DAS_steeringHapticRequest 1 "ACTIVE" 0 "IDLE" ;
+```
+
+```csharp
+// … 43 more messages …
+        class DAS_steeringControl {
+            public const uint can_id = 0x488;
+            public const bool extended = false;
+            public const int dlc = 4;
+            public const string sender = "NEO";
+            [StartBit(23), BigEndian] DAS_steeringControl_DAS_steeringControlType DAS_steeringControlType;
+            [StartBit(31), BigEndian] byte DAS_steeringControlChecksum;
+            [MinMax(0, 15), StartBit(19), BigEndian] byte DAS_steeringControlCounter;
+            /**
+            physical = raw * 0.1 - 1638.35 deg
+            */
+            [MinMax(0, 32767), StartBit(6), BigEndian, Factor(0.1), Offset(-1638.35), PhysRange(-1638.35, 1638.35), Units("deg")] ushort DAS_steeringAngleRequest; // physics: physical zero is raw 16383 (raw span 0…32767); if values cluster around it, consider [X(amplitude, 16383)] // dropped DBC VAL_ 16384 "ZERO_ANGLE": a single named value, too few for an AdHoc enum
+            [StartBit(7), BigEndian] DAS_steeringControl_DAS_steeringHapticRequest DAS_steeringHapticRequest;
+        }
+// … value tables …
+        /**
+        Values of DAS_steeringControl.DAS_steeringControlType
+        */
+        enum DAS_steeringControl_DAS_steeringControlType {
+            ANGLE_CONTROL = 1,
+            DISABLED = 3,
+            NONE = 0,
+            RESERVED = 2,
+        }
+```
+
+A 2-bit signal whose `VAL_` table names all four values becomes a real enum; a 4-bit counter becomes a
+`[MinMax(0, 15)] byte` that AdHoc packs into 4 bits; the 15-bit angle keeps its scaling as metadata and carries a
+note about the distribution its author never stated; the one-entry `VAL_` table that AdHoc cannot express as an
+enum leaves a trail instead of vanishing.
+
 ## Links
 
 | What | Where |
@@ -47,9 +104,10 @@ javac -encoding UTF-8 --release 17 -d out src/org/unirail/adhoc/*.java src/org/u
 java -Dfile.encoding=UTF-8 -cp out org.unirail.DBC2AdHoc <file.dbc or folder> [output folder]
 ```
 
-`validate.sh` expects the AdHocAgent Debug build at `AdHocAgent.exe` (found on `PATH`, or set `AGENT=/path/to/AdHocAgent.exe`)
-(override with `AGENT=…`). It runs the agent with `ADHOC_PARSE_ONLY=1 ADHOC_DUMP_BRANCHES=1` on a copy of each
-file and leaves `AdHoc/<name>.branches.txt` with the packs every branch collected and their ids.
+`validate.sh` looks for `AdHocAgent.exe` on `PATH`, then in the usual local build folders; point it elsewhere with
+`AGENT=/path/to/AdHocAgent.exe ./validate.sh AdHoc`. It runs the agent with `ADHOC_PARSE_ONLY=1
+ADHOC_DUMP_BRANCHES=1` on a copy of each file — nothing is uploaded — and leaves `AdHoc/<name>.branches.txt` with
+the packs every branch collected and the ids the agent assigned.
 
 **Validation result for the shipped samples: all 7 files `OK`** (exit 0, no errors, no warnings).
 
@@ -98,13 +156,41 @@ class MOTORS_DATA {
 The generated Dashboard therefore lists every pack with no `id =` at all, and the agent numbers them on the first
 run. This holds for all messages, 11-bit and 29-bit alike.
 
-### Why no varint attributes
+### Varint: why the converter emits none, and where it says so
 
-A CAN signal is a fixed-width bit field: its raw value is uniformly distributed across exactly `len` bits, and the
-DBC says nothing about where inside that span the values sit. That is the one case where `[A]`/`[V]`/`[X]` makes
-the wire *bigger*, so the converter emits none of them. `[MinMax(lo, hi)]` is the right tool and the converter
-applies it to every non-byte-aligned signal, which lets AdHoc bit-pack the field to the same width the CAN frame
-uses. The physical `[min|max]` from the DBC is a separate, purely informational `[PhysRange]`.
+How CAN stores a signal decides nothing — AdHoc lays out its own frame, and the source's width is never a reason
+to accept or decline `[A]`/`[V]`/`[X]`. What decides it is where the *values* sit.
+
+For a raw CAN signal, the honest default answer is: **uniformly across its whole span**. A `len`-bit signal is
+declared to take every value in `0 … 2^len-1`, and DBC states nothing that narrows it. Uniform is exactly the
+distribution varint cannot help: with no cluster to sit on, every value is encoded at full magnitude and the
+continuation bits are pure overhead. `[MinMax(lo, hi)]` is the right attribute for that claim, and the converter
+puts it on every signal whose span is not a whole number of bytes, so AdHoc bit-packs the field to the same width
+the value actually needs.
+
+The arithmetic, once: varint pays while the typical distance from the declared base stays under roughly two
+million, breaks even to 268 435 455, and beyond that always loses. So a scaled latitude, a Unix timestamp or a
+free-running counter are varint losses regardless of how they were stored.
+
+But DBC *hints* at physics it never states. A name or a unit can mark a signal as a counter that idles near its
+floor, a distance that hugs zero, or a value centred on ambient — all of which are genuine `[A]`/`[V]`/`[X]`
+candidates. That call needs knowledge of the traffic, which the converter does not have, so it invents no
+attribute and instead leaves a comment **on the field** naming the candidate and the reason, wherever the raw span
+exceeds one byte (below that varint is rejected anyway and `[MinMax]` already wins) and stays inside the range
+where varint can still pay off:
+
+```csharp
+[MinMax(0, 16777215), …, Units("km")] uint CF_Clu_Odometer; // physics: the name marks a counter (raw span 0…16777215); if it spends its life near the floor rather than sweeping the whole span, consider [A]
+[StartBit(7), BigEndian, PhysRange(-1000, 1000)] short TORQUE_L;  // physics: a two-sided quantity, raw straddles zero (raw span -32768…32767); if the typical excursion is small, consider [X(amplitude)]
+[MinMax(0, 511), …, Offset(-15), Units("m/s^2")] ushort DAS_accelMin; // physics: physical zero is raw 375 (raw span 0…511); if values cluster around it, consider [X(amplitude, 375)]
+```
+
+The last shape is the one DBC gives away for free: an unsigned signal with a negative `offset` puts physical zero
+at a computable raw value *inside* the span, so a quantity that hovers around zero physically hovers around that
+raw value — a centre `[X]` can be given explicitly. The shipped samples collect 111 such notes.
+
+The physical `[min|max]` from the DBC stays a separate, purely informational `[PhysRange]`; it describes the scaled
+value, never the raw one AdHoc transmits.
 
 ### Why no `_DefaultMaxLengthOf`
 

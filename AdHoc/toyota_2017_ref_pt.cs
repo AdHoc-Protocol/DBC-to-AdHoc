@@ -786,7 +786,7 @@ namespace org.dbc {
             public const string sender = "CGW";
             [StartBit(7), BigEndian] byte BDBF03ID;
             [StartBit(15), BigEndian] byte BDBF03IF;
-            [StartBit(23), BigEndian, Units("trip")] ushort TRIP_CNT;
+            [StartBit(23), BigEndian, Units("trip")] ushort TRIP_CNT; // physics: the name marks a counter (raw span 0…65535); if it spends its life near the floor rather than sweeping the whole span, consider [A]
             /**
             physical = raw * 100 ms
             */
@@ -1222,7 +1222,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.01 m
             */
-            [MinMax(0, 16383), StartBit(5), BigEndian, Factor(0.01), Units("m")] ushort TGT_DIST;
+            [MinMax(0, 16383), StartBit(5), BigEndian, Factor(0.01), Units("m")] ushort TGT_DIST; // physics: a distance (raw span 0…16383); if it hugs zero rather than being uniform, consider [A]
             [StartBit(23), BigEndian] bool XREQPBA;
             [StartBit(22), BigEndian] bool XREQFPB;
             [StartBit(21), BigEndian] bool XREQPB;
@@ -1586,7 +1586,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.625 - 50
             */
-            [StartBit(23), BigEndian, Factor(0.625), Offset(-50)] ushort BV_THOCL;
+            [StartBit(23), BigEndian, Factor(0.625), Offset(-50)] ushort BV_THOCL; // physics: physical zero is raw 80 (raw span 0…65535); if values cluster around it, consider [X(amplitude, 80)]
             [MinMax(0, 15), StartBit(39), BigEndian] byte B_GEAR;
             [StartBit(32), BigEndian] bool B_SMDE;
             [StartBit(47), BigEndian] bool B_D;
@@ -2756,22 +2756,22 @@ namespace org.dbc {
             /**
             physical = raw * 0.01 - 67.67 km/h
             */
-            [MinMax(0, 32767), StartBit(6), BigEndian, Factor(0.01), Offset(-67.67), Units("km/h")] ushort VXFR;
+            [MinMax(0, 32767), StartBit(6), BigEndian, Factor(0.01), Offset(-67.67), Units("km/h")] ushort VXFR; // physics: physical zero is raw 6767 (raw span 0…32767); if values cluster around it, consider [X(amplitude, 6767)]
             [StartBit(23), BigEndian] bool VXFLEF;
             /**
             physical = raw * 0.01 - 67.67 km/h
             */
-            [MinMax(0, 32767), StartBit(22), BigEndian, Factor(0.01), Offset(-67.67), Units("km/h")] ushort VXFL;
+            [MinMax(0, 32767), StartBit(22), BigEndian, Factor(0.01), Offset(-67.67), Units("km/h")] ushort VXFL; // physics: physical zero is raw 6767 (raw span 0…32767); if values cluster around it, consider [X(amplitude, 6767)]
             [StartBit(39), BigEndian] bool VXRREF;
             /**
             physical = raw * 0.01 - 67.67 km/h
             */
-            [MinMax(0, 32767), StartBit(38), BigEndian, Factor(0.01), Offset(-67.67), Units("km/h")] ushort VXRR;
+            [MinMax(0, 32767), StartBit(38), BigEndian, Factor(0.01), Offset(-67.67), Units("km/h")] ushort VXRR; // physics: physical zero is raw 6767 (raw span 0…32767); if values cluster around it, consider [X(amplitude, 6767)]
             [StartBit(55), BigEndian] bool VXRLEF;
             /**
             physical = raw * 0.01 - 67.67 km/h
             */
-            [MinMax(0, 32767), StartBit(54), BigEndian, Factor(0.01), Offset(-67.67), Units("km/h")] ushort VXRL;
+            [MinMax(0, 32767), StartBit(54), BigEndian, Factor(0.01), Offset(-67.67), Units("km/h")] ushort VXRL; // physics: physical zero is raw 6767 (raw span 0…32767); if values cluster around it, consider [X(amplitude, 6767)]
         }
 
         /**
@@ -3069,21 +3069,21 @@ namespace org.dbc {
             /**
             physical = raw * 0.244 - 125 deg/sec
             */
-            [MinMax(0, 1023), StartBit(1), BigEndian, Factor(0.244), Offset(-125), Units("deg/sec")] ushort YR;
+            [MinMax(0, 1023), StartBit(1), BigEndian, Factor(0.244), Offset(-125), Units("deg/sec")] ushort YR; // physics: physical zero is raw 512 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 512)]
             [MinMax(0, 15), StartBit(23), BigEndian] byte YR_CPUMN;
             [StartBit(19), BigEndian] bool GS4S;
             [StartBit(18), BigEndian] bool GS1S;
             /**
             physical = raw * 0.03589 - 18.375 m/s^2
             */
-            [MinMax(0, 1023), StartBit(17), BigEndian, Factor(0.03589), Offset(-18.375), Units("m/s^2")] ushort GL1X;
+            [MinMax(0, 1023), StartBit(17), BigEndian, Factor(0.03589), Offset(-18.375), Units("m/s^2")] ushort GL1X; // physics: physical zero is raw 512 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 512)]
             [MinMax(0, 15), StartBit(39), BigEndian] byte YG_ID;
             [StartBit(35), BigEndian] bool GS5S;
             [StartBit(34), BigEndian] bool GS2S;
             /**
             physical = raw * 0.03589 - 18.375 m/s^2
             */
-            [MinMax(0, 1023), StartBit(33), BigEndian, Factor(0.03589), Offset(-18.375), Units("m/s^2")] ushort GL2Y;
+            [MinMax(0, 1023), StartBit(33), BigEndian, Factor(0.03589), Offset(-18.375), Units("m/s^2")] ushort GL2Y; // physics: physical zero is raw 512 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 512)]
             /**
             physical = raw * 0.244 - 31 deg/sec
             */

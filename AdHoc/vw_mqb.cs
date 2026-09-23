@@ -189,7 +189,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.024 - 20.016 Unit_MeterPerSeconSquar
             */
-            [MinMax(0, 1023), StartBit(29), Factor(0.024), Offset(-20.016), PhysRange(-20.016, 4.536), Units("Unit_MeterPerSeconSquar")] ushort ANB_Zielbrems_Teilbrems_Verz_Anf;
+            [MinMax(0, 1023), StartBit(29), Factor(0.024), Offset(-20.016), PhysRange(-20.016, 4.536), Units("Unit_MeterPerSeconSquar")] ushort ANB_Zielbrems_Teilbrems_Verz_Anf; // physics: physical zero is raw 834 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 834)]
             [StartBit(39), PhysRange(0, 1)] ACC_10_ANB_Zielbremsung_Freigabe ANB_Zielbremsung_Freigabe;
             [StartBit(40), PhysRange(0, 1)] ACC_10_AWV_Vorstufe AWV_Vorstufe;
             [StartBit(41), PhysRange(0, 1)] ACC_10_AWV_Halten AWV_Halten;
@@ -541,11 +541,11 @@ namespace org.dbc {
             /**
             physical = raw * 1 - 511 Unit_Amper
             */
-            [MinMax(0, 1023), StartBit(12), Offset(-511), PhysRange(-511, 510), Units("Unit_Amper")] ushort DC_HYB_iAktLV;
+            [MinMax(0, 1023), StartBit(12), Offset(-511), PhysRange(-511, 510), Units("Unit_Amper")] ushort DC_HYB_iAktLV; // physics: physical zero is raw 511 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 511)]
             /**
             physical = raw * 1 - 511 Unit_Amper
             */
-            [MinMax(0, 1023), StartBit(22), Offset(-511), PhysRange(-511, 510), Units("Unit_Amper")] ushort DC_HYB_iAktReserveLV;
+            [MinMax(0, 1023), StartBit(22), Offset(-511), PhysRange(-511, 510), Units("Unit_Amper")] ushort DC_HYB_iAktReserveLV; // physics: physical zero is raw 511 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 511)]
             /**
             physical = raw * 0.1 Unit_Volt
             */
@@ -675,7 +675,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.03125 - 16 Unit_MeterPerSeconSquar
             */
-            [MinMax(0, 1023), StartBit(24), Factor(0.03125), Offset(-16), PhysRange(-16, 15.90625), Units("Unit_MeterPerSeconSquar")] ushort ESP_Laengsbeschl;
+            [MinMax(0, 1023), StartBit(24), Factor(0.03125), Offset(-16), PhysRange(-16, 15.90625), Units("Unit_MeterPerSeconSquar")] ushort ESP_Laengsbeschl; // physics: physical zero is raw 512 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 512)]
             /**
             physical = raw * 0.1 - 1
             */
@@ -708,7 +708,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.3 - 30 Unit_Bar
             */
-            [MinMax(0, 1023), StartBit(16), Factor(0.3), Offset(-30), PhysRange(-30, 276.6), Units("Unit_Bar")] ushort ESP_Bremsdruck;
+            [MinMax(0, 1023), StartBit(16), Factor(0.3), Offset(-30), PhysRange(-30, 276.6), Units("Unit_Bar")] ushort ESP_Bremsdruck; // physics: physical zero is raw 100 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 100)]
             [StartBit(26), PhysRange(0, 1)] bool ESP_Fahrer_bremst;
             [StartBit(27), PhysRange(0, 1)] bool ESP_Verz_TSK_aktiv;
             [StartBit(28), PhysRange(0, 1)] bool ESP_Lenkeingriff_ADS;
@@ -878,7 +878,7 @@ namespace org.dbc {
             /**
             physical = raw * 1 - 509
             */
-            [MinMax(0, 1023), StartBit(12), Offset(-509), PhysRange(-509, 509)] ushort BR_Eingriffsmoment;
+            [MinMax(0, 1023), StartBit(12), Offset(-509), PhysRange(-509, 509)] ushort BR_Eingriffsmoment; // physics: physical zero is raw 509 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 509)]
             [StartBit(22), PhysRange(0, 1)] bool ESP_PLA_Bremseingriff;
             [StartBit(23), PhysRange(0, 1)] bool ESP_Diagnose;
             [StartBit(24), PhysRange(0, 1)] bool ESC_Reku_Freigabe;
@@ -1015,11 +1015,11 @@ namespace org.dbc {
             /**
             physical = raw * 1 - 509
             */
-            [MinMax(0, 1023), StartBit(12), Offset(-509), PhysRange(-509, 509)] ushort GE_MMom_Soll_02;
+            [MinMax(0, 1023), StartBit(12), Offset(-509), PhysRange(-509, 509)] ushort GE_MMom_Soll_02; // physics: physical zero is raw 509 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 509)]
             /**
             physical = raw * 1 - 509
             */
-            [MinMax(0, 1023), StartBit(22), Offset(-509), PhysRange(-509, 509)] ushort GE_MMom_Vorhalt_02;
+            [MinMax(0, 1023), StartBit(22), Offset(-509), PhysRange(-509, 509)] ushort GE_MMom_Vorhalt_02; // physics: physical zero is raw 509 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 509)]
             /**
             physical = raw * 0.1
             */
@@ -1068,7 +1068,7 @@ namespace org.dbc {
             /**
             physical = raw * 1 - 509 Unit_NewtoMeter
             */
-            [MinMax(0, 1023), StartBit(48), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort GE_Aufnahmemoment;
+            [MinMax(0, 1023), StartBit(48), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort GE_Aufnahmemoment; // physics: physical zero is raw 509 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 509)]
             [MinMax(0, 3), StartBit(58), PhysRange(0, 3)] byte GE_Anf_Zylabsch;
             [MinMax(0, 3), StartBit(62), PhysRange(0, 3)] byte GE_HYB_DZ_Eingriff;
         }
@@ -1102,7 +1102,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.024 - 2.016 Unit_MeterPerSeconSquar
             */
-            [MinMax(0, 511), StartBit(16), Factor(0.024), Offset(-2.016), PhysRange(-2.016, 10.224), Units("Unit_MeterPerSeconSquar")] ushort GE_amax_moeglich;
+            [MinMax(0, 511), StartBit(16), Factor(0.024), Offset(-2.016), PhysRange(-2.016, 10.224), Units("Unit_MeterPerSeconSquar")] ushort GE_amax_moeglich; // physics: physical zero is raw 84 (raw span 0…511); if values cluster around it, consider [X(amplitude, 84)]
             [MinMax(0, 15), StartBit(25), PhysRange(0, 15)] byte GE_Charisma_FahrPr;
             [MinMax(0, 3), StartBit(29), PhysRange(0, 3)] byte GE_Charisma_Status;
             [StartBit(32), PhysRange(0, 254)] byte GE_Verlustmoment;
@@ -1586,23 +1586,23 @@ namespace org.dbc {
             /**
             physical = raw * 1 - 509 Unit_NewtoMeter
             */
-            [MinMax(0, 1023), StartBit(12), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort MO_Mom_Soll_Roh;
+            [MinMax(0, 1023), StartBit(12), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort MO_Mom_Soll_Roh; // physics: physical zero is raw 509 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 509)]
             /**
             physical = raw * 1 - 509 Unit_NewtoMeter
             */
-            [MinMax(0, 1023), StartBit(22), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort MO_Mom_Ist_Summe;
+            [MinMax(0, 1023), StartBit(22), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort MO_Mom_Ist_Summe; // physics: physical zero is raw 509 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 509)]
             /**
             physical = raw * 1 - 509 Unit_NewtoMeter
             */
-            [MinMax(0, 1023), StartBit(32), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort MO_Mom_Traegheit_Summe;
+            [MinMax(0, 1023), StartBit(32), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort MO_Mom_Traegheit_Summe; // physics: physical zero is raw 509 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 509)]
             /**
             physical = raw * 1 - 509 Unit_NewtoMeter
             */
-            [MinMax(0, 1023), StartBit(42), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort MO_Mom_Soll_gefiltert;
+            [MinMax(0, 1023), StartBit(42), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort MO_Mom_Soll_gefiltert; // physics: physical zero is raw 509 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 509)]
             /**
             physical = raw * 1 - 509 Unit_NewtoMeter
             */
-            [MinMax(0, 511), StartBit(52), Offset(-509), PhysRange(-509, 0), Units("Unit_NewtoMeter")] ushort MO_Mom_Schub;
+            [MinMax(0, 511), StartBit(52), Offset(-509), PhysRange(-509, 0), Units("Unit_NewtoMeter")] ushort MO_Mom_Schub; // physics: physical zero is raw 509 (raw span 0…511); if values cluster around it, consider [X(amplitude, 509)]
             [StartBit(61), PhysRange(0, 1)] bool MO_Status_Normalbetrieb_01;
             [StartBit(62), PhysRange(0, 1)] bool MO_erste_Ungenauschwelle;
             [StartBit(63), PhysRange(0, 1)] bool MO_QBit_Motormomente;
@@ -1621,12 +1621,12 @@ namespace org.dbc {
             /**
             physical = raw * 1 - 509 Unit_NewtoMeter
             */
-            [MinMax(0, 511), StartBit(12), Offset(-509), PhysRange(-509, 0), Units("Unit_NewtoMeter")] ushort MO_Mom_neg_verfuegbar;
+            [MinMax(0, 511), StartBit(12), Offset(-509), PhysRange(-509, 0), Units("Unit_NewtoMeter")] ushort MO_Mom_neg_verfuegbar; // physics: physical zero is raw 509 (raw span 0…511); if values cluster around it, consider [X(amplitude, 509)]
             [MinMax(0, 511), StartBit(21), PhysRange(0, 509), Units("Unit_NewtoMeter")] ushort MO_Mom_Begr_stat;
             /**
             physical = raw * 1 - 509 Unit_NewtoMeter
             */
-            [MinMax(0, 1023), StartBit(30), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort MO_Mom_Begr_dyn;
+            [MinMax(0, 1023), StartBit(30), Offset(-509), PhysRange(-509, 509), Units("Unit_NewtoMeter")] ushort MO_Mom_Begr_dyn; // physics: physical zero is raw 509 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 509)]
             [MinMax(0, 127), StartBit(40), PhysRange(0, 100), Units("Unit_PerCent")] byte MO_Momentenintegral_02;
             [StartBit(47), PhysRange(0, 1)] bool MO_QBit_Drehzahl_01;
             /**
@@ -1889,7 +1889,7 @@ namespace org.dbc {
             /**
             physical = raw * 1 - 100 Unit_NewtoMeter
             */
-            [MinMax(0, 1023), StartBit(40), Offset(-100), PhysRange(-100, 922), Units("Unit_NewtoMeter")] ushort MO_HYB_VM_Mom_oE;
+            [MinMax(0, 1023), StartBit(40), Offset(-100), PhysRange(-100, 922), Units("Unit_NewtoMeter")] ushort MO_HYB_VM_Mom_oE; // physics: physical zero is raw 100 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 100)]
             [StartBit(50), PhysRange(0, 1)] bool MO_HYB_VM_aktiv;
             [StartBit(51), PhysRange(0, 1)] bool MO_HYB_Schaltverhinderung;
         }
@@ -2279,7 +2279,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.024 - 2.016 Unit_MeterPerSeconSquar
             */
-            [MinMax(0, 511), StartBit(48), Factor(0.024), Offset(-2.016), PhysRange(-2.016, 10.224), Units("Unit_MeterPerSeconSquar")] ushort TSK_ax_Getriebe_02; // dropped DBC VAL_ 511 "Neutralwert": a single named value, too few for an AdHoc enum
+            [MinMax(0, 511), StartBit(48), Factor(0.024), Offset(-2.016), PhysRange(-2.016, 10.224), Units("Unit_MeterPerSeconSquar")] ushort TSK_ax_Getriebe_02; // physics: physical zero is raw 84 (raw span 0…511); if values cluster around it, consider [X(amplitude, 84)] // dropped DBC VAL_ 511 "Neutralwert": a single named value, too few for an AdHoc enum
             [StartBit(57), PhysRange(0, 1)] TSK_06_TSK_Zwangszusch_ESP TSK_Zwangszusch_ESP;
             /**
             physical = raw * 0.024 Unit_MeterPerSeconSquar

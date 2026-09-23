@@ -320,7 +320,7 @@ namespace org.dbc {
             */
             [StartBit(16), Factor(0.5), PhysRange(0, 100), Units("%")] byte SCR_UREA_LEVEL;
             [StartBit(24), PhysRange(0, 255)] byte SCR_NO_REMAINING_RESTARTS;
-            [StartBit(32), PhysRange(0, 25000), Units("km")] ushort SCR_REMAINING_DISTANCE;
+            [StartBit(32), PhysRange(0, 25000), Units("km")] ushort SCR_REMAINING_DISTANCE; // physics: a distance (raw span 0…65535); if it hugs zero rather than being uniform, consider [A]
         }
 
         /**
@@ -363,7 +363,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.1 km
             */
-            [MinMax(0, 16777215), StartBit(0), Factor(0.1), PhysRange(0, 1677721.4), Units("km")] uint CF_Clu_Odometer;
+            [MinMax(0, 16777215), StartBit(0), Factor(0.1), PhysRange(0, 1677721.4), Units("km")] uint CF_Clu_Odometer; // physics: the name marks a counter (raw span 0…16777215); if it spends its life near the floor rather than sweeping the whole span, consider [A]
         }
 
         /**
@@ -461,7 +461,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.01 - 10.23 m/s^2
             */
-            [MinMax(0, 2047), StartBit(0), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort aBasis;
+            [MinMax(0, 2047), StartBit(0), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort aBasis; // physics: physical zero is raw 1023 (raw span 0…2047); if values cluster around it, consider [X(amplitude, 1023)]
             [StartBit(11), PhysRange(0, 1)] bool BrakeLight;
             [StartBit(12), PhysRange(0, 1)] bool DCEnable;
             [MinMax(0, 7), StartBit(13), PhysRange(0, 7)] byte AliveCounterTCS;
@@ -473,7 +473,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.01 - 10.23 m/s^2
             */
-            [MinMax(0, 2047), StartBit(32), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort ACCEL_REF_ACC;
+            [MinMax(0, 2047), StartBit(32), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort ACCEL_REF_ACC; // physics: physical zero is raw 1023 (raw span 0…2047); if values cluster around it, consider [X(amplitude, 1023)]
             [MinMax(0, 3), StartBit(43), PhysRange(0, 3)] byte ACCEnable;
             [MinMax(0, 3), StartBit(45), PhysRange(0, 3)] byte DriverOverride;
             [StartBit(47), PhysRange(0, 1)] bool StandStill;
@@ -523,11 +523,11 @@ namespace org.dbc {
             /**
             physical = raw * 2 - 32768
             */
-            [StartBit(0), Factor(2), Offset(-32768), PhysRange(-32768, 98302)] ushort SA_COUNT;
+            [StartBit(0), Factor(2), Offset(-32768), PhysRange(-32768, 98302)] ushort SA_COUNT; // physics: the name marks a counter (raw span 0…65535); if it spends its life near the floor rather than sweeping the whole span, consider [A]
             /**
             physical = raw * 2 - 32768
             */
-            [MinMax(0, 32767), StartBit(16), Factor(2), Offset(-32768), PhysRange(-32768, 32766)] ushort SA_Z_COUNT;
+            [MinMax(0, 32767), StartBit(16), Factor(2), Offset(-32768), PhysRange(-32768, 32766)] ushort SA_Z_COUNT; // physics: the name marks a counter (raw span 0…32767); if it spends its life near the floor rather than sweeping the whole span, consider [A]
             [StartBit(31), PhysRange(0, 1)] bool SA_Z_FLAG;
         }
 
@@ -546,7 +546,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.001 - 4.094 m/s^2
             */
-            [MinMax(0, 4095), StartBit(8), Factor(0.001), Offset(-4.094), PhysRange(-4.094, 0), Units("m/s^2")] ushort CF_Ems_DecelReq;
+            [MinMax(0, 4095), StartBit(8), Factor(0.001), Offset(-4.094), PhysRange(-4.094, 0), Units("m/s^2")] ushort CF_Ems_DecelReq; // physics: physical zero is raw 4094 (raw span 0…4095); if values cluster around it, consider [X(amplitude, 4094)]
             /**
             physical = raw * 1.322 hPa
             */
@@ -623,7 +623,7 @@ namespace org.dbc {
             /**
             physical = raw * 1 - 1000
             */
-            [MinMax(0, 4095), StartBit(32), Offset(-1000), PhysRange(-1000, 3000)] ushort EPB_FORCE;
+            [MinMax(0, 4095), StartBit(32), Offset(-1000), PhysRange(-1000, 3000)] ushort EPB_FORCE; // physics: physical zero is raw 1000 (raw span 0…4095); if values cluster around it, consider [X(amplitude, 1000)]
             /**
             physical = raw * 0.01 g
             */
@@ -975,7 +975,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.01 - 20.48
             */
-            [MinMax(0, 4095), StartBit(11), Factor(0.01), Offset(-20.48), PhysRange(-20.48, 20.46)] ushort CR_Mdps_DrvTq;
+            [MinMax(0, 4095), StartBit(11), Factor(0.01), Offset(-20.48), PhysRange(-20.48, 20.46)] ushort CR_Mdps_DrvTq; // physics: physical zero is raw 2048 (raw span 0…4095); if values cluster around it, consider [X(amplitude, 2048)]
             [StartBit(23), PhysRange(0, 1)] bool CF_Mdps_ALTRequest;
             /**
             physical = raw * 0.1 Deg
@@ -1263,7 +1263,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.01 - 20.48 Nm
             */
-            [MinMax(0, 4095), StartBit(0), Factor(0.01), Offset(-20.48), PhysRange(-20.48, 20.47), Units("Nm")] ushort CR_Esc_StrTqReq;
+            [MinMax(0, 4095), StartBit(0), Factor(0.01), Offset(-20.48), PhysRange(-20.48, 20.47), Units("Nm")] ushort CR_Esc_StrTqReq; // physics: physical zero is raw 2048 (raw span 0…4095); if values cluster around it, consider [X(amplitude, 2048)]
             [StartBit(12), PhysRange(0, 1)] bool CF_Esc_Act;
             [MinMax(0, 7), StartBit(13), PhysRange(0, 7)] byte CF_Esc_CtrMode;
             [StartBit(16), PhysRange(0, 1)] bool CF_Esc_Def;
@@ -1296,7 +1296,7 @@ namespace org.dbc {
             /**
             physical = raw * 1 - 512 Nm
             */
-            [MinMax(0, 1023), StartBit(0), Offset(-512), Units("Nm")] ushort Clutch_Driving_Tq;
+            [MinMax(0, 1023), StartBit(0), Offset(-512), Units("Nm")] ushort Clutch_Driving_Tq; // physics: physical zero is raw 512 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 512)]
             /**
             physical = raw * 0.9766
             */
@@ -1652,7 +1652,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.0078125 - 8 Nm
             */
-            [MinMax(0, 2047), StartBit(0), Factor(0.0078125), Offset(-8), PhysRange(-8, 7.9921875), Units("Nm")] ushort CR_Mdps_StrColTq;
+            [MinMax(0, 2047), StartBit(0), Factor(0.0078125), Offset(-8), PhysRange(-8, 7.9921875), Units("Nm")] ushort CR_Mdps_StrColTq; // physics: physical zero is raw 1024 (raw span 0…2047); if values cluster around it, consider [X(amplitude, 1024)]
             [StartBit(11), PhysRange(0, 1)] bool CF_Mdps_Def;
             [StartBit(12), PhysRange(0, 1)] bool CF_Mdps_ToiUnavail;
             [StartBit(13), PhysRange(0, 1)] bool CF_Mdps_ToiActive;
@@ -1664,11 +1664,11 @@ namespace org.dbc {
             /**
             physical = raw * 0.01 - 20.48 Nm
             */
-            [MinMax(0, 4095), StartBit(40), Factor(0.01), Offset(-20.48), PhysRange(-20.48, 20.47), Units("Nm")] ushort CR_Mdps_StrTq;
+            [MinMax(0, 4095), StartBit(40), Factor(0.01), Offset(-20.48), PhysRange(-20.48, 20.47), Units("Nm")] ushort CR_Mdps_StrTq; // physics: physical zero is raw 2048 (raw span 0…4095); if values cluster around it, consider [X(amplitude, 2048)]
             /**
             physical = raw * 0.1 - 204.8
             */
-            [MinMax(0, 4095), StartBit(52), Factor(0.1), Offset(-204.8), PhysRange(-204.8, 204.7)] ushort CR_Mdps_OutTq;
+            [MinMax(0, 4095), StartBit(52), Factor(0.1), Offset(-204.8), PhysRange(-204.8, 204.7)] ushort CR_Mdps_OutTq; // physics: physical zero is raw 2048 (raw span 0…4095); if values cluster around it, consider [X(amplitude, 2048)]
         }
 
         /**
@@ -1707,7 +1707,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.01 - 327 A
             */
-            [StartBit(0), Factor(0.01), Offset(-327), PhysRange(-327, 328), Units("A")] ushort BAT_SNSR_I;
+            [StartBit(0), Factor(0.01), Offset(-327), PhysRange(-327, 328), Units("A")] ushort BAT_SNSR_I; // physics: physical zero is raw 32700 (raw span 0…65535); if values cluster around it, consider [X(amplitude, 32700)]
             [StartBit(16), PhysRange(0, 100), Units("%")] byte BAT_SOC;
             /**
             physical = raw * 0.001 + 6 V
@@ -1998,7 +1998,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.0078125 - 8 Nm
             */
-            [MinMax(0, 2047), StartBit(16), Factor(0.0078125), Offset(-8), PhysRange(-8, 8), Units("Nm")] ushort CR_Lkas_StrToqReq;
+            [MinMax(0, 2047), StartBit(16), Factor(0.0078125), Offset(-8), PhysRange(-8, 8), Units("Nm")] ushort CR_Lkas_StrToqReq; // physics: physical zero is raw 1024 (raw span 0…2047); if values cluster around it, consider [X(amplitude, 1024)]
             [StartBit(27), PhysRange(0, 1)] bool CF_Lkas_ActToi;
             [StartBit(28), PhysRange(0, 1)] bool CF_Lkas_ToiFlt;
             [MinMax(0, 7), StartBit(29), PhysRange(0, 7)] byte CF_Lkas_HbaSysState;
@@ -2145,7 +2145,7 @@ namespace org.dbc {
             /**
             physical = raw * 1 - 600 Deg
             */
-            [StartBit(0), Offset(-600), PhysRange(-600, 600), Units("Deg")] ushort Ster_Pos;
+            [StartBit(0), Offset(-600), PhysRange(-600, 600), Units("Deg")] ushort Ster_Pos; // physics: physical zero is raw 600 (raw span 0…65535); if values cluster around it, consider [X(amplitude, 600)]
             [StartBit(16), PhysRange(0, 254), Units("km/h")] byte FRSS;
             [StartBit(24), PhysRange(0, 254), Units("km/h")] byte FLSS;
             [StartBit(32), PhysRange(0, 254), Units("km/h")] byte RRSS;
@@ -2153,7 +2153,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 - 50 Bar
             */
-            [StartBit(48), Factor(0.0625), Offset(-50), PhysRange(-50, 50), Units("Bar")] ushort CLU_PRES;
+            [StartBit(48), Factor(0.0625), Offset(-50), PhysRange(-50, 50), Units("Bar")] ushort CLU_PRES; // physics: physical zero is raw 800 (raw span 0…65535); if values cluster around it, consider [X(amplitude, 800)]
         }
 
         /**
@@ -2373,13 +2373,13 @@ namespace org.dbc {
             /**
             physical = raw * 0.01 - 10.23 m/s^2
             */
-            [MinMax(0, 2047), StartBit(24), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort aReqMax;
+            [MinMax(0, 2047), StartBit(24), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort aReqMax; // physics: physical zero is raw 1023 (raw span 0…2047); if values cluster around it, consider [X(amplitude, 1023)]
             [StartBit(35), PhysRange(0, 1)] bool TakeOverReq;
             [StartBit(36), PhysRange(0, 1)] bool PreFill;
             /**
             physical = raw * 0.01 - 10.23 m/s^2
             */
-            [MinMax(0, 2047), StartBit(37), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort aReqMin;
+            [MinMax(0, 2047), StartBit(37), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort aReqMin; // physics: physical zero is raw 1023 (raw span 0…2047); if values cluster around it, consider [X(amplitude, 1023)]
             [MinMax(0, 3), StartBit(48), PhysRange(0, 3)] byte CF_VSM_ConfMode;
             [MinMax(0, 3), StartBit(50), PhysRange(0, 3)] byte AEB_Failinfo;
             [MinMax(0, 3), StartBit(52), PhysRange(0, 3)] byte AEB_Status;
@@ -2424,15 +2424,15 @@ namespace org.dbc {
             /**
             physical = raw * 0.1 - 20 m
             */
-            [MinMax(0, 511), StartBit(24), Factor(0.1), Offset(-20), PhysRange(-20, 31.1), Units("m")] ushort ACC_ObjLatPos;
+            [MinMax(0, 511), StartBit(24), Factor(0.1), Offset(-20), PhysRange(-20, 31.1), Units("m")] ushort ACC_ObjLatPos; // physics: physical zero is raw 200 (raw span 0…511); if values cluster around it, consider [X(amplitude, 200)]
             /**
             physical = raw * 0.1 m
             */
-            [MinMax(0, 2047), StartBit(33), Factor(0.1), PhysRange(0, 204.7), Units("m")] ushort ACC_ObjDist;
+            [MinMax(0, 2047), StartBit(33), Factor(0.1), PhysRange(0, 204.7), Units("m")] ushort ACC_ObjDist; // physics: a distance (raw span 0…2047); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.1 - 170 m/s
             */
-            [MinMax(0, 4095), StartBit(44), Factor(0.1), Offset(-170), PhysRange(-170, 239.5), Units("m/s")] ushort ACC_ObjRelSpd;
+            [MinMax(0, 4095), StartBit(44), Factor(0.1), Offset(-170), PhysRange(-170, 239.5), Units("m/s")] ushort ACC_ObjRelSpd; // physics: physical zero is raw 1700 (raw span 0…4095); if values cluster around it, consider [X(amplitude, 1700)]
             [MinMax(0, 3), StartBit(56), PhysRange(0, 3)] byte Navi_SCC_Curve_Status;
             [MinMax(0, 3), StartBit(58), PhysRange(0, 3)] byte Navi_SCC_Curve_Act;
             [MinMax(0, 3), StartBit(60), PhysRange(0, 3)] byte Navi_SCC_Camera_Act;
@@ -2473,13 +2473,13 @@ namespace org.dbc {
             /**
             physical = raw * 0.01 - 10.23 m/s^2
             */
-            [MinMax(0, 2047), StartBit(0), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort LAT_ACCEL;
+            [MinMax(0, 2047), StartBit(0), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort LAT_ACCEL; // physics: physical zero is raw 1023 (raw span 0…2047); if values cluster around it, consider [X(amplitude, 1023)]
             [StartBit(11), PhysRange(0, 1)] bool LAT_ACCEL_STAT;
             [StartBit(12), PhysRange(0, 1)] bool LAT_ACCEL_DIAG;
             /**
             physical = raw * 0.01 - 10.23 m/s^2
             */
-            [MinMax(0, 2047), StartBit(13), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort LONG_ACCEL;
+            [MinMax(0, 2047), StartBit(13), Factor(0.01), Offset(-10.23), PhysRange(-10.23, 10.24), Units("m/s^2")] ushort LONG_ACCEL; // physics: physical zero is raw 1023 (raw span 0…2047); if values cluster around it, consider [X(amplitude, 1023)]
             [StartBit(24), PhysRange(0, 1)] bool LONG_ACCEL_STAT;
             [StartBit(25), PhysRange(0, 1)] bool LONG_ACCEL_DIAG;
             /**
@@ -2491,7 +2491,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.01 - 40.95
             */
-            [MinMax(0, 8191), StartBit(40), Factor(0.01), Offset(-40.95), PhysRange(-40.95, 40.96)] ushort YAW_RATE;
+            [MinMax(0, 8191), StartBit(40), Factor(0.01), Offset(-40.95), PhysRange(-40.95, 40.96)] ushort YAW_RATE; // physics: physical zero is raw 4095 (raw span 0…8191); if values cluster around it, consider [X(amplitude, 4095)]
             [StartBit(53), PhysRange(0, 1)] bool YAW_RATE_STAT;
             [StartBit(54), PhysRange(0, 1)] bool YAW_RATE_DIAG;
             [MinMax(0, 15), StartBit(56), PhysRange(0, 15)] byte ESP12_AliveCounter;

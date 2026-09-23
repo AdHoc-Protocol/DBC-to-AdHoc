@@ -70,7 +70,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.1 - 1638.35 deg
             */
-            [MinMax(0, 32767), StartBit(6), BigEndian, Factor(0.1), Offset(-1638.35), PhysRange(-1638.35, 1638.35), Units("deg")] ushort DAS_steeringAngleRequest; // dropped DBC VAL_ 16384 "ZERO_ANGLE": a single named value, too few for an AdHoc enum
+            [MinMax(0, 32767), StartBit(6), BigEndian, Factor(0.1), Offset(-1638.35), PhysRange(-1638.35, 1638.35), Units("deg")] ushort DAS_steeringAngleRequest; // physics: physical zero is raw 16383 (raw span 0…32767); if values cluster around it, consider [X(amplitude, 16383)] // dropped DBC VAL_ 16384 "ZERO_ANGLE": a single named value, too few for an AdHoc enum
             [StartBit(7), BigEndian] DAS_steeringControl_DAS_steeringHapticRequest DAS_steeringHapticRequest;
         }
 
@@ -91,7 +91,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.03 - 15.232 m/s^3
             */
-            [MinMax(0, 511), StartBit(18), Factor(0.03), Offset(-15.232), PhysRange(-15.232, 0.098), Units("m/s^3")] ushort DAS_jerkMin; // dropped DBC VAL_ 511 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(0, 511), StartBit(18), Factor(0.03), Offset(-15.232), PhysRange(-15.232, 0.098), Units("m/s^3")] ushort DAS_jerkMin; // physics: physical zero is raw 508 (raw span 0…511); if values cluster around it, consider [X(amplitude, 508)] // dropped DBC VAL_ 511 "SNA": a single named value, too few for an AdHoc enum
             /**
             physical = raw * 0.059 m/s^3
             */
@@ -99,11 +99,11 @@ namespace org.dbc {
             /**
             physical = raw * 0.04 - 15 m/s^2
             */
-            [MinMax(0, 511), StartBit(35), Factor(0.04), Offset(-15), PhysRange(-15, 5.44), Units("m/s^2")] ushort DAS_accelMin; // dropped DBC VAL_ 511 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(0, 511), StartBit(35), Factor(0.04), Offset(-15), PhysRange(-15, 5.44), Units("m/s^2")] ushort DAS_accelMin; // physics: physical zero is raw 375 (raw span 0…511); if values cluster around it, consider [X(amplitude, 375)] // dropped DBC VAL_ 511 "SNA": a single named value, too few for an AdHoc enum
             /**
             physical = raw * 0.04 - 15 m/s^2
             */
-            [MinMax(0, 511), StartBit(44), Factor(0.04), Offset(-15), PhysRange(-15, 5.44), Units("m/s^2")] ushort DAS_accelMax; // dropped DBC VAL_ 511 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(0, 511), StartBit(44), Factor(0.04), Offset(-15), PhysRange(-15, 5.44), Units("m/s^2")] ushort DAS_accelMax; // physics: physical zero is raw 375 (raw span 0…511); if values cluster around it, consider [X(amplitude, 375)] // dropped DBC VAL_ 511 "SNA": a single named value, too few for an AdHoc enum
             [MinMax(0, 7), StartBit(53)] byte DAS_controlCounter;
             [StartBit(56)] byte DAS_controlChecksum;
         }
@@ -134,11 +134,11 @@ namespace org.dbc {
             /**
             physical = raw * 0.04 - 15 m/s^2
             */
-            [MinMax(0, 511), StartBit(35), Factor(0.04), Offset(-15), PhysRange(-15, 5.44), Units("m/s^2")] ushort DAS_locAccelMin; // dropped DBC VAL_ 511 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(0, 511), StartBit(35), Factor(0.04), Offset(-15), PhysRange(-15, 5.44), Units("m/s^2")] ushort DAS_locAccelMin; // physics: physical zero is raw 375 (raw span 0…511); if values cluster around it, consider [X(amplitude, 375)] // dropped DBC VAL_ 511 "SNA": a single named value, too few for an AdHoc enum
             /**
             physical = raw * 0.04 - 15 m/s^2
             */
-            [MinMax(0, 511), StartBit(44), Factor(0.04), Offset(-15), PhysRange(-15, 5.44), Units("m/s^2")] ushort DAS_locAccelMax; // dropped DBC VAL_ 511 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(0, 511), StartBit(44), Factor(0.04), Offset(-15), PhysRange(-15, 5.44), Units("m/s^2")] ushort DAS_locAccelMax; // physics: physical zero is raw 375 (raw span 0…511); if values cluster around it, consider [X(amplitude, 375)] // dropped DBC VAL_ 511 "SNA": a single named value, too few for an AdHoc enum
             [MinMax(0, 7), StartBit(53)] byte DAS_longControlCounter;
             [StartBit(56)] byte DAS_longControlChecksum;
         }
@@ -213,7 +213,7 @@ namespace org.dbc {
             /**
             physical = raw * 0.1 - 819.200012 deg
             */
-            [MinMax(0, 16383), StartBit(37), BigEndian, Factor(0.1), Offset(-819.200012), Units("deg")] ushort EPAS_internalSAS;
+            [MinMax(0, 16383), StartBit(37), BigEndian, Factor(0.1), Offset(-819.200012), Units("deg")] ushort EPAS_internalSAS; // physics: physical zero is raw 8192 (raw span 0…16383); if values cluster around it, consider [X(amplitude, 8192)]
             [StartBit(2), BigEndian, PhysRange(-1, 2)] EPAS_sysStatus_EPAS_steeringFault EPAS_steeringFault;
             /**
             physical = raw * 50 - 25575 N
@@ -243,19 +243,19 @@ namespace org.dbc {
             /**
             physical = raw * 0.1 - 819.2 deg
             */
-            [MinMax(0, 16383), StartBit(37), BigEndian, Factor(0.1), Offset(-819.2), PhysRange(-819.2, 819), Units("deg")] ushort EPAS_internalSAS;
+            [MinMax(0, 16383), StartBit(37), BigEndian, Factor(0.1), Offset(-819.2), PhysRange(-819.2, 819), Units("deg")] ushort EPAS_internalSAS; // physics: physical zero is raw 8192 (raw span 0…16383); if values cluster around it, consider [X(amplitude, 8192)]
             [StartBit(2), BigEndian, PhysRange(0, 1)] bool EPAS_steeringFault;
             /**
             physical = raw * 50 - 25575 N
             */
-            [MinMax(0, 1023), StartBit(1), BigEndian, Factor(50), Offset(-25575), PhysRange(-25575, 25575), Units("N")] ushort EPAS_steeringRackForce;
+            [MinMax(0, 1023), StartBit(1), BigEndian, Factor(50), Offset(-25575), PhysRange(-25575, 25575), Units("N")] ushort EPAS_steeringRackForce; // physics: physical zero is raw 512 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 512)]
             [StartBit(3), BigEndian, PhysRange(0, 1)] bool EPAS_steeringReduced;
             [StartBit(63), BigEndian, PhysRange(0, 255)] byte EPAS_sysStatusChecksum;
             [MinMax(0, 15), StartBit(51), BigEndian, PhysRange(0, 15)] byte EPAS_sysStatusCounter;
             /**
             physical = raw * 0.01 - 20.5 Nm
             */
-            [MinMax(0, 4095), StartBit(19), BigEndian, Factor(0.01), Offset(-20.5), PhysRange(-20.5, 20.45), Units("Nm")] ushort EPAS_torsionBarTorque;
+            [MinMax(0, 4095), StartBit(19), BigEndian, Factor(0.01), Offset(-20.5), PhysRange(-20.5, 20.45), Units("Nm")] ushort EPAS_torsionBarTorque; // physics: physical zero is raw 2050 (raw span 0…4095); if values cluster around it, consider [X(amplitude, 2050)]
         }
 
         /**
@@ -269,11 +269,11 @@ namespace org.dbc {
             /**
             physical = raw * 0.5 - 2048 deg
             */
-            [MinMax(0, 16383), StartBit(5), BigEndian, Factor(0.5), Offset(-2048), Units("deg")] ushort StW_Angl; // dropped DBC VAL_ 16383 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(0, 16383), StartBit(5), BigEndian, Factor(0.5), Offset(-2048), Units("deg")] ushort StW_Angl; // physics: physical zero is raw 4096 (raw span 0…16383); if values cluster around it, consider [X(amplitude, 4096)] // dropped DBC VAL_ 16383 "SNA": a single named value, too few for an AdHoc enum
             /**
             physical = raw * 0.5 - 2048 /s
             */
-            [MinMax(0, 16383), StartBit(21), BigEndian, Factor(0.5), Offset(-2048), Units("/s")] ushort StW_AnglSpd; // dropped DBC VAL_ 16383 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(0, 16383), StartBit(21), BigEndian, Factor(0.5), Offset(-2048), Units("/s")] ushort StW_AnglSpd; // physics: physical zero is raw 4096 (raw span 0…16383); if values cluster around it, consider [X(amplitude, 4096)] // dropped DBC VAL_ 16383 "SNA": a single named value, too few for an AdHoc enum
             [StartBit(33), BigEndian, PhysRange(-1, 4)] STW_ANGL_STAT_StW_AnglSens_Stat StW_AnglSens_Stat;
             [MinMax(0, 3), StartBit(35), BigEndian, PhysRange(3, 3), ValueTable("STW_ANGL_STAT_StW_AnglSens_Id")] byte StW_AnglSens_Id;
             [MinMax(0, 15), StartBit(55), BigEndian, PhysRange(0, 15)] byte MC_STW_ANGL_STAT;
@@ -291,11 +291,11 @@ namespace org.dbc {
             /**
             physical = raw * 0.1 - 819.2 deg
             */
-            [MinMax(0, 16383), StartBit(5), BigEndian, Factor(0.1), Offset(-819.2), PhysRange(-819.2, 819), Units("deg")] ushort StW_AnglHP; // dropped DBC VAL_ 16383 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(0, 16383), StartBit(5), BigEndian, Factor(0.1), Offset(-819.2), PhysRange(-819.2, 819), Units("deg")] ushort StW_AnglHP; // physics: physical zero is raw 8192 (raw span 0…16383); if values cluster around it, consider [X(amplitude, 8192)] // dropped DBC VAL_ 16383 "SNA": a single named value, too few for an AdHoc enum
             /**
             physical = raw * 0.5 - 4096 deg/s
             */
-            [MinMax(0, 16383), StartBit(21), BigEndian, Factor(0.5), Offset(-4096), PhysRange(-4096, 4095.5), Units("deg/s")] ushort StW_AnglHP_Spd; // dropped DBC VAL_ 16383 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(0, 16383), StartBit(21), BigEndian, Factor(0.5), Offset(-4096), PhysRange(-4096, 4095.5), Units("deg/s")] ushort StW_AnglHP_Spd; // physics: physical zero is raw 8192 (raw span 0…16383); if values cluster around it, consider [X(amplitude, 8192)] // dropped DBC VAL_ 16383 "SNA": a single named value, too few for an AdHoc enum
             [StartBit(33), BigEndian] STW_ANGLHP_STAT_StW_AnglHP_Sens_Stat StW_AnglHP_Sens_Stat;
             [StartBit(35), BigEndian] STW_ANGLHP_STAT_StW_AnglHP_Sens_Id StW_AnglHP_Sens_Id;
             [MinMax(0, 15), StartBit(55), BigEndian, PhysRange(0, 15)] byte MC_STW_ANGLHP_STAT;
@@ -313,12 +313,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.25 Nm
             */
-            [MinMax(-4096, 4095), StartBit(0), Factor(0.25), PhysRange(-750, 750), Units("Nm")] short DI_torqueDriver; // dropped DBC VAL_ -4096 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(-4096, 4095), StartBit(0), Factor(0.25), PhysRange(-750, 750), Units("Nm")] short DI_torqueDriver; // physics: a two-sided quantity, raw straddles zero (raw span -4096…4095); if the typical excursion is small, consider [X(amplitude)] // dropped DBC VAL_ -4096 "SNA": a single named value, too few for an AdHoc enum
             [MinMax(0, 7), StartBit(13)] byte DI_torque1Counter;
             /**
             physical = raw * 0.25 Nm
             */
-            [MinMax(-4096, 4095), StartBit(16), Factor(0.25), PhysRange(-750, 750), Units("Nm")] short DI_torqueMotor; // dropped DBC VAL_ -4096 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(-4096, 4095), StartBit(16), Factor(0.25), PhysRange(-750, 750), Units("Nm")] short DI_torqueMotor; // physics: a two-sided quantity, raw straddles zero (raw span -4096…4095); if the typical excursion is small, consider [X(amplitude)] // dropped DBC VAL_ -4096 "SNA": a single named value, too few for an AdHoc enum
             [MinMax(0, 7), StartBit(29), ValueTable("DI_torque1_DI_soptState")] byte DI_soptState;
             [StartBit(32), PhysRange(-17000, 17000), Units("RPM")] short DI_motorRPM; // dropped DBC VAL_ -32768 "SNA": a single named value, too few for an AdHoc enum
             /**
@@ -339,13 +339,13 @@ namespace org.dbc {
             /**
             physical = raw * 0.5 Nm
             */
-            [MinMax(-2048, 2047), StartBit(0), Factor(0.5), PhysRange(-750, 750), Units("Nm")] short DI_torqueEstimate; // dropped DBC VAL_ -2048 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(-2048, 2047), StartBit(0), Factor(0.5), PhysRange(-750, 750), Units("Nm")] short DI_torqueEstimate; // physics: a two-sided quantity, raw straddles zero (raw span -2048…2047); if the typical excursion is small, consider [X(amplitude)] // dropped DBC VAL_ -2048 "SNA": a single named value, too few for an AdHoc enum
             [MinMax(0, 7), StartBit(12), ValueTable("DI_torque2_DI_gear")] byte DI_gear;
             [StartBit(15)] DI_torque2_DI_brakePedal DI_brakePedal;
             /**
             physical = raw * 0.05 - 25 MPH
             */
-            [MinMax(0, 4095), StartBit(16), Factor(0.05), Offset(-25), PhysRange(-25, 179.75), Units("MPH")] ushort DI_vehicleSpeed; // dropped DBC VAL_ 4095 "SNA": a single named value, too few for an AdHoc enum
+            [MinMax(0, 4095), StartBit(16), Factor(0.05), Offset(-25), PhysRange(-25, 179.75), Units("MPH")] ushort DI_vehicleSpeed; // physics: physical zero is raw 500 (raw span 0…4095); if values cluster around it, consider [X(amplitude, 500)] // dropped DBC VAL_ 4095 "SNA": a single named value, too few for an AdHoc enum
             [MinMax(0, 7), StartBit(28), ValueTable("DI_torque2_DI_gearRequest")] byte DI_gearRequest;
             [StartBit(31)] DI_torque2_DI_torqueInterfaceFailure DI_torqueInterfaceFailure;
             [MinMax(0, 15), StartBit(32)] byte DI_torque2Counter;
@@ -1008,12 +1008,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.25 - 8 m
             */
-            [MinMax(0, 1023), StartBit(8), Factor(0.25), Offset(-8), PhysRange(-8, 247.5), Units("m"), Multiplexed(1)] ushort? UI_stopSignStopLineDist;
+            [MinMax(0, 1023), StartBit(8), Factor(0.25), Offset(-8), PhysRange(-8, 247.5), Units("m"), Multiplexed(1)] ushort? UI_stopSignStopLineDist; // physics: physical zero is raw 32 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 32)]
             [MinMax(0, 127), StartBit(18), PhysRange(0, 100), Multiplexed(1)] byte? UI_stopSignStopLineConf;
             /**
             physical = raw * 0.25 - 8 m
             */
-            [MinMax(0, 1023), StartBit(8), Factor(0.25), Offset(-8), PhysRange(-8, 247.5), Units("m"), Multiplexed(2)] ushort? UI_trafficLightStopLineDist;
+            [MinMax(0, 1023), StartBit(8), Factor(0.25), Offset(-8), PhysRange(-8, 247.5), Units("m"), Multiplexed(2)] ushort? UI_trafficLightStopLineDist; // physics: physical zero is raw 32 (raw span 0…1023); if values cluster around it, consider [X(amplitude, 32)]
             [MinMax(0, 127), StartBit(18), PhysRange(0, 100), Multiplexed(2)] byte? UI_trafficLightStopLineConf;
             /**
             physical = raw * 0.25 m/s

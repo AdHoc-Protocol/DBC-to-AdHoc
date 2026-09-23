@@ -384,10 +384,73 @@ public class DBC2AdHoc {
 				for (Signal s : m.signals) {
 					doc(sb, I3, signalDoc(s));
 					String field = unique(s.name, members);
-					sb.append(I3).append(signalField(s)).append(' ').append(field).append(";").append(droppedNote(s)).append("\n");
+					sb.append(I3).append(signalField(s)).append(' ').append(field).append(";")
+							.append(physicsNote(s, enumName.containsKey(s))).append(droppedNote(s)).append("\n");
 				}
 				sb.append(I2).append("}\n");
 			}
+		}
+
+		// Name tokens that hint at where a signal's values sit. DBC never states this; it is the developer's call,
+		// so a match produces a comment naming a candidate attribute, never the attribute itself.
+		static final Set<String> COUNTER_TOKENS = new HashSet<>(Arrays.asList(
+				"counter", "count", "cnt", "seq", "sequence", "odo", "odometer", "mileage", "runtime", "uptime",
+				"accum", "accumulated", "total", "events", "errors", "faults"));
+		static final Set<String> DISTANCE_TOKENS = new HashSet<>(Arrays.asList(
+				"dist", "distance", "range", "gap", "clearance", "headway", "proximity", "depth"));
+		static final Set<String> CENTRED_TOKENS = new HashSet<>(Arrays.asList(
+				"delta", "diff", "difference", "error", "err", "offset", "bias", "correction", "rate", "accel",
+				"acceleration", "torque", "yawrate", "trim", "deviation"));
+		static final Set<String> DISTANCE_UNITS = new HashSet<>(Arrays.asList("m", "cm", "mm", "km", "dm"));
+		static final Set<String> TEMPERATURE_UNITS = new HashSet<>(Arrays.asList("degC", "cdegC", "K"));
+
+		/**
+		 * DBC states a signal's width and its physical scaling, never where its values actually sit. Three shapes are
+		 * hinted at strongly enough by a name or a unit to be worth raising: a counter, a distance that spends its
+		 * life near zero, and a value centred on zero or on ambient. Varint is a decision taken after understanding
+		 * the data, so the converter names the candidate and the reason and leaves the choice to the developer.
+		 *
+		 * <p>Raised only for a raw integer signal whose span exceeds one byte — below that AdHoc rejects varint and
+		 * {@code [MinMax]} bit-packing already wins — and stays under 268 435 455, past which varint always loses.
+		 */
+		static String physicsNote(Signal s, boolean enumTyped) {
+			if (enumTyped || s.valType != 0 || s.len <= 8 || 27 < s.len) return "";
+			Set<String> tokens = tokens(s.name);
+			long lo = s.signed ? -(1L << (s.len - 1)) : 0, hi = s.signed ? (1L << (s.len - 1)) - 1 : (1L << s.len) - 1;
+			String span = "raw span " + lo + "…" + hi;
+			boolean centredName = !disjoint(tokens, CENTRED_TOKENS) || TEMPERATURE_UNITS.contains(s.unit);
+			String what = TEMPERATURE_UNITS.contains(s.unit) ? "a temperature, normally close to ambient" : "a two-sided quantity";
+
+			if (!disjoint(tokens, COUNTER_TOKENS))
+				return " // physics: the name marks a counter (" + span + "); if it spends its life near the floor rather than"
+						+ " sweeping the whole span, consider [A]";
+			// Signed raw: the wire value itself straddles zero.
+			if (s.signed && centredName)
+				return " // physics: " + what + ", raw straddles zero (" + span + "); if the typical excursion is small, consider [X(amplitude)]";
+			// Unsigned raw with a negative offset: physical zero sits at this raw value, so the cluster is centred there.
+			if (!s.signed && s.offset < 0 && 0 < s.factor) {
+				long zero = Math.round(-s.offset / s.factor);
+				if (0 < zero && zero < hi)
+					return " // physics: physical zero is raw " + zero + " (" + span + "); if values cluster around it,"
+							+ " consider [X(amplitude, " + zero + ")]";
+			}
+			if (!disjoint(tokens, DISTANCE_TOKENS) && DISTANCE_UNITS.contains(s.unit))
+				return " // physics: a distance (" + span + "); if it hugs zero rather than being uniform, consider [A]";
+			return "";
+		}
+
+		/** Splits a DBC signal name into lowercase tokens on `_`, digits and camel-case boundaries. */
+		static Set<String> tokens(String name) {
+			Set<String> out = new HashSet<>();
+			for (String part : name.split("[^A-Za-z]+"))
+				for (String t : part.split("(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])"))
+					if (!t.isEmpty()) out.add(t.toLowerCase());
+			return out;
+		}
+
+		static boolean disjoint(Set<String> a, Set<String> b) {
+			for (String s : a) if (b.contains(s)) return false;
+			return true;
 		}
 
 		/**

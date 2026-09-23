@@ -227,12 +227,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -250,12 +250,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -273,12 +273,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -296,12 +296,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -319,12 +319,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -342,12 +342,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -365,12 +365,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -388,12 +388,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -411,12 +411,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -434,12 +434,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -457,12 +457,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -480,12 +480,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -503,12 +503,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -526,12 +526,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -549,12 +549,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
@@ -572,12 +572,12 @@ namespace org.dbc {
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST;
+            [MinMax(0, 4095), StartBit(7), BigEndian, Factor(0.0625), PhysRange(0, 255.5), Units("m")] ushort LONG_DIST; // physics: a distance (raw span 0…4095); if it hugs zero rather than being uniform, consider [A]
             [StartBit(11), BigEndian, PhysRange(0, 1)] bool NEW_TRACK;
             /**
             physical = raw * 0.0625 m
             */
-            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST;
+            [MinMax(-512, 511), StartBit(9), BigEndian, Factor(0.0625), PhysRange(0, 63.5), Units("m")] short LAT_DIST; // physics: a distance (raw span -512…511); if it hugs zero rather than being uniform, consider [A]
             /**
             physical = raw * 0.03125 m/s
             */
