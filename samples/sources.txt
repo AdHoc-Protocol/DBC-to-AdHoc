@@ -1,0 +1,9 @@
+# Where every sample comes from: <path in samples/> <page of the original>. Written by fetch-samples.sh;
+# the converter links these pages in the headers of the descriptions.
+comma_body.dbc           https://github.com/commaai/opendbc/blob/master/opendbc/dbc/comma_body.dbc
+toyota_2017_ref_pt.dbc   https://github.com/commaai/opendbc/blob/master/opendbc/dbc/toyota_2017_ref_pt.dbc
+tesla_can.dbc            https://github.com/commaai/opendbc/blob/master/opendbc/dbc/tesla_can.dbc
+hyundai_2015_ccan.dbc    https://github.com/commaai/opendbc/blob/master/opendbc/dbc/hyundai_2015_ccan.dbc
+gm_global_a_chassis.dbc  https://github.com/commaai/opendbc/blob/master/opendbc/dbc/gm_global_a_chassis.dbc
+acura_ilx_2016_nidec.dbc https://github.com/commaai/opendbc/blob/master/opendbc/dbc/acura_ilx_2016_nidec.dbc
+vw_mqb.dbc               https://github.com/commaai/opendbc/blob/master/opendbc/dbc/vw_mqb.dbc
